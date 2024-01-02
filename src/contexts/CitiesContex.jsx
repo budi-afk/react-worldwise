@@ -6,34 +6,34 @@ const BASE_URL = "http://localhost:3001";
 
 const initialState = { cities: [], isLoading: false, currentCity: {} };
 
-function CitiesProvider({ children }) {
-  function reducer(state, action) {
-    switch (action.type) {
-      case "loading":
-        return { ...state, isLoading: true };
-      case "rejected":
-        return { ...state, isLoading: false, error: action.payload };
-      case "cities/loaded":
-        return { ...state, cities: action.payload, isLoading: false };
-      case "city/loaded":
-        return { ...state, currentCity: action.payload, isLoading: false };
-      case "city/created":
-        return {
-          ...state,
-          cities: [...state.cities, action.payload],
-          isLoading: false,
-          currentCity: action.payload,
-        };
-      case "city/deleted":
-        return {
-          ...state,
-          cities: state.cities.filter((city) => city.id !== action.payload),
-          isLoading: false,
-          currentCity: {},
-        };
-    }
+function reducer(state, action) {
+  switch (action.type) {
+    case "loading":
+      return { ...state, isLoading: true };
+    case "rejected":
+      return { ...state, isLoading: false, error: action.payload };
+    case "cities/loaded":
+      return { ...state, cities: action.payload, isLoading: false };
+    case "city/loaded":
+      return { ...state, currentCity: action.payload, isLoading: false };
+    case "city/created":
+      return {
+        ...state,
+        cities: [...state.cities, action.payload],
+        isLoading: false,
+        currentCity: action.payload,
+      };
+    case "city/deleted":
+      return {
+        ...state,
+        cities: state.cities.filter((city) => city.id !== action.payload),
+        isLoading: false,
+        currentCity: {},
+      };
   }
+}
 
+function CitiesProvider({ children }) {
   const [{ cities, isLoading, currentCity }, dispatch] = useReducer(
     reducer,
     initialState

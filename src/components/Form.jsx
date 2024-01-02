@@ -49,7 +49,6 @@ function Form() {
             `${BASE_URL}?latitude=${lat}&longitude=${lng}`
           );
           const data = await res.json();
-          // console.log(data);
 
           if (!data.city)
             throw new Error("Please click on the city on the Map!");
@@ -133,9 +132,7 @@ function Form() {
       </div>
 
       <div className={styles.buttons}>
-        <Button onClick={() => {}} type="primary">
-          Add
-        </Button>
+        <Button type="primary">Add</Button>
         <BackButton />
       </div>
     </form>
